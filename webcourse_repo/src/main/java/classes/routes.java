@@ -1,0 +1,42 @@
+package classes;
+
+
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
+import java.util.UUID;
+
+@Entity
+@Table(name = "routes")
+public class routes {
+
+
+    private int route_id;
+    private String route_name;
+
+    public routes (){
+    }
+
+    public routes (int route_id, String route_name){
+        this.route_id = route_id;
+        this.route_name = route_name;
+    }
+
+    @Id
+    @Column(name = "route_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public int getRoute_id(){
+        return this.route_id;
+    }
+    public void setRoute_id(int route_id) {
+        this.route_id = route_id;
+    }
+
+    @Column(name = "route_name")
+    public String getRoute_name(){
+        return this.route_name;
+    }
+    public void setRoute_name(String route_name){
+        this.route_name = route_name;
+    }
+}
