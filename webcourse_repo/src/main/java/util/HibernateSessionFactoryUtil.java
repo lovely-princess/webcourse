@@ -3,8 +3,6 @@ package util;
 import classes.routes;
 import classes.stations;
 import classes.users;
-import classes.stations_prices;
-import classes.stations_in_routes;
 import classes.users_in_trips;
 import classes.schedule;
 
@@ -28,8 +26,6 @@ public class HibernateSessionFactoryUtil {
                 configuration.addAnnotatedClass(stations.class);
                 configuration.addAnnotatedClass(schedule.class);
                 configuration.addAnnotatedClass(users_in_trips.class);
-                configuration.addAnnotatedClass(stations_in_routes.class);
-                configuration.addAnnotatedClass(stations_prices.class);
                 StandardServiceRegistryBuilder builder =
                         new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
                 sessionFactory = configuration.buildSessionFactory(builder.build());

@@ -13,13 +13,15 @@ public class routes {
 
     private int route_id;
     private String route_name;
+    private double price;
 
     public routes (){
     }
 
-    public routes (int route_id, String route_name){
+    public routes (int route_id, String route_name, double price){
         this.route_id = route_id;
         this.route_name = route_name;
+        this.price = price;
     }
 
     @Id
@@ -30,6 +32,14 @@ public class routes {
     }
     public void setRoute_id(int route_id) {
         this.route_id = route_id;
+    }
+
+    @Column(name = "route_price")
+    public double getPrice() {
+        return price;
+    }
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     @Column(name = "route_name")

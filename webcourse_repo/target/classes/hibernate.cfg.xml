@@ -16,8 +16,6 @@
         <mapping class="classes.routes" />
         <mapping class="classes.schedule" />
         <mapping class="classes.users_in_trips" />
-        <mapping class="classes.stations_in_routes" />
-        <mapping class="classes.stations_prices" />
 
     </session-factory>
 </hibernate-configuration>

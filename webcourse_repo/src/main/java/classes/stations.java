@@ -11,13 +11,17 @@ public class stations {
 
     private int station_id;
     private String station_name;
+    private routes route_id;
+    private int number_in_route;
 
     public stations (){
     }
 
-    public stations (int station_id, String station_name){
+    public stations (int station_id, String station_name, routes route_id, int number_in_route){
         this.station_id = station_id;
         this.station_name = station_name;
+        this.route_id = route_id;
+        this.number_in_route = number_in_route;
     }
 
     @Id
@@ -37,4 +41,25 @@ public class stations {
     public void setStation_name(String station_name){
         this.station_name = station_name;
     }
+
+
+    @ManyToOne(targetEntity = routes.class)
+    @JoinColumn(name="route_id")
+    public routes getRoute_id() {
+        return route_id;
+    }
+
+    public void setRoute_id(routes route_id) {
+        this.route_id = route_id;
+    }
+
+    @Column(name="number_in_route")
+    public int getNumber_in_route() {
+        return number_in_route;
+    }
+
+    public void setNumber_in_route(int number_in_route) {
+        this.number_in_route = number_in_route;
+    }
+
 }
