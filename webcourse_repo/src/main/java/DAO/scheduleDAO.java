@@ -10,6 +10,7 @@ import util.HibernateSessionFactoryUtil;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -17,7 +18,7 @@ import java.util.List;
 
 public class scheduleDAO {
 
-    public void addTrip(schedule trip){
+    public void addTrip(schedule trip) throws SQLException{
         Session session = null;
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         session.beginTransaction();
@@ -28,7 +29,7 @@ public class scheduleDAO {
         }
     }
 
-    public void updateTrip(schedule trip){
+    public void updateTrip(schedule trip) throws SQLException{
         Session session = null;
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         session.beginTransaction();
@@ -39,7 +40,7 @@ public class scheduleDAO {
         }
     }
 
-    public void deleteTrip(schedule trip){
+    public void deleteTrip(schedule trip) throws SQLException{
         Session session = null;
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         session.beginTransaction();
@@ -51,7 +52,7 @@ public class scheduleDAO {
     }
 
 
-    public List<schedule> getAllTrips (){
+    public List<schedule> getAllTrips () throws SQLException{
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<schedule> criteria = builder.createQuery(schedule.class);
@@ -61,17 +62,18 @@ public class scheduleDAO {
         return response;
     }
 
-    public List<schedule> getTripsByStations (stations from_station, stations to_station){
-        List<schedule> trips = new ArrayList<schedule>();
-        if (from_station.getRoute_id() != to_station.getRoute_id()){
-            return trips;
+    public List<schedule> getTripsByStations (stations from_station, stations to_station) throws SQLException{
+        System.out.println(from_station.getRoute_id().getRoute_id() + "  " + to_station.getRoute_id().getRoute_id());
+        if (from_station.getRoute_id().getRoute_id() != to_station.getRoute_id().getRoute_id()){
+            System.out.println("\nim here!!!\n");
+            return new ArrayList<schedule>();
         }
         Session session = null;
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         session.beginTransaction();
         Query<schedule> query = session.createQuery("from schedule WHERE route_id = :route_id", schedule.class);
-        query.setParameter("route_id", to_station);
-        trips = (List<schedule>)query.list();
+        query.setParameter("route_id", to_station.getRoute_id());
+        List<schedule> trips = query.getResultList();
         session.getTransaction().commit();
         if (session != null && session.isOpen()) {
             session.close();
@@ -79,7 +81,7 @@ public class scheduleDAO {
         return trips;
     }
 
-    public schedule getTripById(int trip_id) {
+    public schedule getTripById(int trip_id) throws SQLException {
         Session session = null;
         schedule trip = null;
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
@@ -90,9 +92,8 @@ public class scheduleDAO {
         return trip;
     }
 
-    public List<schedule> getTripsByDate (Timestamp date_time){
+    public List<schedule> getTripsByDate (Timestamp date_time)  throws SQLException{
         Session session = null;
-        System.out.println("\n" + date_time + "\n");
         List<schedule> trips = new ArrayList<schedule>();
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         session.beginTransaction();

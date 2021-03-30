@@ -5,12 +5,13 @@ import classes.schedule;
 import classes.users;
 import classes.users_in_trips;
 
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.List;
 
 public class main {
-    public static void main(String[] args){
+    public static void main(String[] args) throws SQLException {
         System.out.println("its alive!");
         scheduleDAO schedule_dao = new scheduleDAO();
         List<schedule> all_trips = schedule_dao.getAllTrips();

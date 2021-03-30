@@ -8,13 +8,14 @@ import util.HibernateSessionFactoryUtil;
 import org.hibernate.query.Query;
 
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 
 public class users_in_tripsDAO {
-    public Collection<users_in_trips> getOrdersByUserId (users user){
+    public List<users_in_trips> getOrdersByUserId (users user) throws SQLException{
         Session session = null;
         List<users_in_trips> trips = new ArrayList<users_in_trips>();
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
@@ -29,7 +30,7 @@ public class users_in_tripsDAO {
         return trips;
     }
 
-    public void addTicketsOrder (users_in_trips order){
+    public void addTicketsOrder (users_in_trips order) throws SQLException{
         Session session = null;
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         session.beginTransaction();
@@ -41,7 +42,7 @@ public class users_in_tripsDAO {
     }
 
 
-    public Collection<users_in_trips> getOrdersByTripId (schedule trip){
+    public List<users_in_trips> getOrdersByTripId (schedule trip) throws SQLException{
         Session session = null;
         List<users_in_trips> trips = new ArrayList<users_in_trips>();
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
@@ -56,7 +57,7 @@ public class users_in_tripsDAO {
         return trips;
     }
 
-    public int getOrdersCountByTripId (schedule trip){
+    public int getOrdersCountByTripId (schedule trip) throws SQLException {
         Session session = null;
         int trips_cnt = 0;
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();

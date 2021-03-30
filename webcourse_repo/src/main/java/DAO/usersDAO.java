@@ -10,13 +10,14 @@ import util.HibernateSessionFactoryUtil;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import java.sql.SQLException;
 import java.util.Collection;
 import java.util.List;
 
 public class usersDAO {
 
 
-    public void addUser(users user){
+    public void addUser(users user) throws SQLException{
         Session session = null;
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         session.beginTransaction();
@@ -27,7 +28,7 @@ public class usersDAO {
         }
     }
 
-    public void updateUser(users user){
+    public void updateUser(users user) throws SQLException{
         Session session = null;
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         session.beginTransaction();
@@ -38,7 +39,7 @@ public class usersDAO {
         }
     }
 
-    public void deleteUser(users user){
+    public void deleteUser(users user) throws SQLException{
         Session session = null;
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         session.beginTransaction();
@@ -49,7 +50,7 @@ public class usersDAO {
         }
     }
 
-    public users getUserById(int user_id) {
+    public users getUserById(int user_id) throws SQLException {
         Session session = null;
         users user = null;
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
@@ -60,7 +61,7 @@ public class usersDAO {
         return user;
     }
 
-    public Collection<users> loadAll(){
+    public Collection<users> loadAll() throws SQLException{
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<users> criteria = builder.createQuery(users.class);

@@ -29,25 +29,25 @@ CREATE TABLE IF NOT EXISTS routes(
 );
 
 CREATE TABLE IF NOT EXISTS stations(
-    station_name    text
-    ,station_id     serial PRIMARY KEY
-    ,route_id            int REFERENCES routes (route_id)
-    ,number_in_route     int
+    station_name            text
+    ,station_id             serial      PRIMARY KEY
+    ,route_id               int         REFERENCES routes (route_id)
+    ,number_in_route        int
 );
 
 
 CREATE TABLE IF NOT EXISTS schedule(
-    trip_id     serial PRIMARY KEY
-    ,route_id   int REFERENCES routes (route_id)
-    ,date_time  timestamp
-    ,seats      int
+    trip_id         serial              PRIMARY KEY
+    ,route_id       int                 REFERENCES routes (route_id)
+    ,date_time      timestamp
+    ,seats          int
 )
 ;
 
 CREATE TABLE IF NOT EXISTS users_in_trips(
-    user_id           int REFERENCES users (user_id),
-    trip_id           int REFERENCES schedule (trip_id),
-    from_station_id   int REFERENCES stations (station_id),
-    to_station_id     int REFERENCES stations (station_id),
-    user_in_trip_id   serial PRIMARY KEY
+    user_id             int           REFERENCES users (user_id),
+    trip_id             int           REFERENCES schedule (trip_id),
+    from_station_id     int           REFERENCES stations (station_id),
+    to_station_id       int           REFERENCES stations (station_id),
+    user_in_trip_id     serial        PRIMARY KEY
 );

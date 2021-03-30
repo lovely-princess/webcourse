@@ -1,5 +1,7 @@
 INSERT INTO users (is_admin, user_name, user_contact_info) VALUES
-    (TRUE, 'Анатолий Семёнович Павлов', '{"phone": "+7(123)456-78-90"}');
+    (TRUE, 'Павлов Анатолий Семёнович', '{"phone": "+7(123)456-78-90"}')
+    ,(FALSE, 'Косаткина Кристина Константиновна', '{"phone": "+7(987)654-32-10"}')
+    ,(FALSE, 'Иванов Иван Иванович', '{"phone": "+7(777)777-77-77"}');
 
 INSERT INTO routes(route_id, route_name, route_price) VALUES
     (1, 'буква к', 123),
@@ -37,6 +39,15 @@ VALUES  (1, '2021-4-21 21:27:00', 40)
         ,(3, '2021-5-6 12:34:56', 33)
         ,(2, '2098-01-01 7:30:00', 1)
 ;
+
+INSERT INTO users_in_trips(user_id, trip_id, from_station_id, to_station_id)
+VALUES (1, 1, 1, 2)
+       ,(2, 1, 9, 11)
+;
+
+SELECT *
+FROM users_in_trips JOIN stations s ON s.station_id = users_in_trips.from_station_id
+                    JOIN stations s2 ON s2.station_id = users_in_trips.to_station_id;
 
 SELECT *
 FROM stations JOIN routes r ON r.route_id = stations.route_id;
