@@ -60,3 +60,7 @@ SELECT count(user_in_trip_id)
 FROM users_in_trips
 WHERE trip_id = 1
 ;
+
+SELECT * FROM schedule;
+
+DELETE FROM schedule WHERE seats = 10;

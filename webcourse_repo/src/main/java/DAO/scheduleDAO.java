@@ -83,13 +83,20 @@ public class scheduleDAO {
 
     public schedule getTripById(int trip_id) throws SQLException {
         Session session = null;
-        schedule trip = null;
+        List<schedule> trips = new ArrayList<schedule>();
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        trip = (schedule) session.load(schedule.class, trip_id);
+        session.beginTransaction();
+        Query<schedule> query = session.createQuery("from schedule WHERE trip_id = :trip_id", schedule.class);
+        query.setParameter("trip_id", trip_id);
+        trips = (List<schedule>)query.list();
+        session.getTransaction().commit();
         if (session != null && session.isOpen()) {
             session.close();
         }
-        return trip;
+        for(schedule trip : trips){
+            return trip;
+        }
+        return null;
     }
 
     public List<schedule> getTripsByDate (Timestamp date_time)  throws SQLException{

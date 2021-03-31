@@ -60,4 +60,34 @@ public class scheduleTests {
         Assert.assertEquals(trips.size(), 0);
 
     }
+
+    @Test
+    public void getAllTripsTest () throws SQLException{
+        scheduleDAO schedule_dao = new scheduleDAO();
+        List<schedule> trips = schedule_dao.getAllTrips();
+        Assert.assertEquals(trips.size(), 5);
+    }
+
+    @Test
+    public void addUpdateDeleteTripTest () throws SQLException{
+        scheduleDAO schedule_dao = new scheduleDAO();
+        schedule trip = new schedule();
+        trip.setDate_time(new Timestamp(122, 3, 21, 21, 27, 0, 0));
+
+        routes route = new routes();
+        route.setRoute_id(1);
+        trip.setRoute_id(route);
+        trip.setSeats(10);
+        schedule_dao.addTrip(trip);
+        int id = trip.getTrip_id();
+        System.out.println(schedule_dao.getTripById(id));
+        System.out.println(schedule_dao.getTripById(id).getSeats());
+        Assert.assertEquals(schedule_dao.getTripById(id).getSeats(), 10);
+        trip.setSeats(11);
+        schedule_dao.updateTrip(trip);
+        int s = schedule_dao.getTripById(id).getSeats();
+        Assert.assertEquals(s, 11);
+        schedule_dao.deleteTrip(trip);
+        Assert.assertEquals(schedule_dao.getAllTrips().size(), 5);
+    }
 }
