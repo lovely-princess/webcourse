@@ -61,7 +61,7 @@ public class usersDAO {
         return user;
     }
 
-    public Collection<users> loadAll() throws SQLException{
+    public List<users> loadAll() throws SQLException{
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<users> criteria = builder.createQuery(users.class);

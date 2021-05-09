@@ -3,6 +3,9 @@ INSERT INTO users (is_admin, user_name, user_contact_info) VALUES
     ,(FALSE, 'Косаткина Кристина Константиновна', '{"phone": "+7(987)654-32-10"}')
     ,(FALSE, 'Иванов Иван Иванович', '{"phone": "+7(777)777-77-77"}');
 
+SELECT * FROM users;
+
+
 INSERT INTO routes(route_id, route_name, route_price) VALUES
     (1, 'буква к', 123),
     (2, 'нутельная гангстерша', 228),

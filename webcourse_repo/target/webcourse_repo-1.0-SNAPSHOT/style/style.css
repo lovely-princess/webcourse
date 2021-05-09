@@ -1,0 +1,5 @@
+#map {
+    width: 1300px;
+    height: 1390px;
+    background: url("./map.png") bottom left / contain no-repeat;
+}
