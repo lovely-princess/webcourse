@@ -35,6 +35,10 @@ INSERT INTO stations(route_id, station_name, number_in_route) VALUES
     (3, 'смысл жизни', 7)
 ;
 
+SELECT * FROM webcourse.public.stations;
+
+
+
 INSERT INTO schedule(route_id, date_time, seats)
 VALUES  (1, '2021-4-21 21:27:00', 40)
         ,(3, '2021-4-28 22:28:00', 21)

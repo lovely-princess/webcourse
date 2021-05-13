@@ -11,6 +11,7 @@ import util.HibernateSessionFactoryUtil;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -52,13 +53,22 @@ public class usersDAO {
 
     public users getUserById(int user_id) throws SQLException {
         Session session = null;
-        users user = null;
         session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        user = (users) session.load(users.class, user_id);
+        List<users> user = new ArrayList<users>();
+
+        session.beginTransaction();
+        Query<users> query = session.createQuery("from users WHERE user_id = :user_id", users.class);
+        query.setParameter("user_id", user_id);
+        user = (List<users>)query.list();
+        session.getTransaction().commit();
         if (session != null && session.isOpen()) {
             session.close();
         }
-        return user;
+        for(users us : user){
+            return us;
+        }
+        return null;
+
     }
 
     public List<users> loadAll() throws SQLException{

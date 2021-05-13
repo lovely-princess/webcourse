@@ -51,3 +51,4 @@ CREATE TABLE IF NOT EXISTS users_in_trips(
     to_station_id       int           REFERENCES stations (station_id),
     user_in_trip_id     serial        PRIMARY KEY
 );
+

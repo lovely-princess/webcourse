@@ -8,6 +8,8 @@ import util.HibernateSessionFactoryUtil;
 import org.hibernate.query.Query;
 
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -41,6 +43,15 @@ public class users_in_tripsDAO {
         }
     }
 
+    public List<users_in_trips> loadAll() throws SQLException{
+        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<users_in_trips> criteria = builder.createQuery(users_in_trips.class);
+        criteria.from(users_in_trips.class);
+        List<users_in_trips> response = session.createQuery(criteria).getResultList();
+        session.close();
+        return response;
+    }
 
     public List<users_in_trips> getOrdersByTripId (schedule trip) throws SQLException{
         Session session = null;
