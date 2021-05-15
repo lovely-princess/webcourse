@@ -46,16 +46,36 @@ public class loggedController {
 
 
 
-    @RequestMapping(value = "/usersorders/{id}", method = RequestMethod.GET)
-    public ModelAndView usersorders(@PathVariable("id") int id) throws SQLException {
+
+
+    @RequestMapping(value = "/usersorders/{id}", method = RequestMethod.POST)
+    public ModelAndView usersorders(@PathVariable("id") int info_id,
+                                    @RequestParam(name = "user_id", required = true) int user_id) throws SQLException {
         users user = new users();
-        user.setUser_id(id);
+        user.setUser_id(info_id);
         users_in_tripsDAO usersintripsdao = new users_in_tripsDAO();
         List<users_in_trips> trips = usersintripsdao.getOrdersByUserId(user);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("usersorders");
         modelAndView.addObject("usersOrders", trips);
-        modelAndView.addObject("user_id", id);
+        modelAndView.addObject("user_id", user_id);
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/tripsorders/{id}", method = RequestMethod.POST)
+    public ModelAndView tripsorders(@PathVariable("id") int info_id,
+                                    @RequestParam(name = "user_id", required = true) int user_id) throws SQLException {
+        users_in_tripsDAO users_in_tripsdao = new users_in_tripsDAO();
+        schedule trip = new schedule();
+        trip.setTrip_id(info_id);
+
+        List<users_in_trips> trips = users_in_tripsdao.getOrdersByTripId(trip);
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("tripsorders");
+        modelAndView.addObject("trip", trip);
+        modelAndView.addObject("tripsOrders", trips);
+        modelAndView.addObject("user_id", user_id);
         return modelAndView;
     }
 
@@ -245,7 +265,7 @@ public class loggedController {
                                     @RequestParam(name = "user_id", required = true) int user_id) throws SQLException {
         users user = new users();
 
-        user.setUser_id(user_id);
+        user.setUser_id(change_user_id);
         user.setUser_name(name);
         user.setUser_contact_info("{\"phone\": \"" + phone + "\"}");
         user.setIs_admin(admin);
@@ -272,6 +292,14 @@ public class loggedController {
         stations to = stationsdao.getTripById(to_id);
         scheduleDAO scheduledao = new scheduleDAO();
         List<schedule> trips = scheduledao.getTripsByStations(from, to);
+        int price;
+        if(trips.get(0).getRoute_id().getRoute_id() == 1){
+            price = 123;
+        } else if (trips.get(0).getRoute_id().getRoute_id() == 2){
+            price = 6;
+        } else {
+            price = 100000000;
+        }
 
         usersDAO usersdao = new usersDAO();
         users user = usersdao.getUserById(user_id);
@@ -283,13 +311,14 @@ public class loggedController {
         modelAndView.addObject("to", to);
         modelAndView.addObject("user_id", user_id);
         modelAndView.addObject("is_admin", user.getIs_admin());
+        modelAndView.addObject("price", price);
 
         return modelAndView;
 
     }
 
     @RequestMapping(value = "/ordertrip", method = RequestMethod.POST)
-    public ModelAndView selecttrip(@RequestParam(name = "trip_id", required = true) int trip_id,
+    public ModelAndView selecttripp(@RequestParam(name = "trip_id", required = true) int trip_id,
                                    @RequestParam(name = "from_id", required = true) int from_id,
                                    @RequestParam(name = "to_id", required = true) int to_id,
                                    @RequestParam(name = "user_id", required = true) int user_id) throws SQLException{

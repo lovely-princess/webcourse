@@ -35,7 +35,10 @@
     </tr>
     <c:forEach var="user" items="${usersList}">
         <tr style="border: solid black 1px;">
-            <td style="border: solid black 1px;"><a href="/usersorders/${user.user_id}">${user.user_id}</a></td>
+            <td style="border: solid black 1px;"><form action="/usersorders/${user.user_id}" method="post">
+                                                    <input style="width: 0px" readonly required value="${user_id}" type="number" name="user_id">
+                                                    <input type="submit" value="${user.user_id}"></input>
+                                                 </form></td>
             <td style="border: solid black 1px;">${user.user_name}</td>
             <td style="border: solid black 1px;">${user.user_contact_info}</td>
             <td style="border: solid black 1px;">${user.is_admin}</td>
@@ -71,7 +74,10 @@
     </tr>
     <c:forEach var="trip" items="${tripsList}">
         <tr style="border: solid black 1px;">
-            <td style="border: solid black 1px;">${trip.trip_id}</td>
+            <td style="border: solid black 1px;"><form action="/tripsorders/${trip.trip_id}" method="post">
+                                                    <input style="width: 0px" readonly required value="${user_id}" type="number" name="user_id">
+                                                    <input type="submit" value="${trip.trip_id}"></input>
+                                                </form></td>
             <td style="border: solid black 1px;">${trip.route_id.route_name}</td>
             <td style="border: solid black 1px;">${trip.date_time}</td>
             <td style="border: solid black 1px;">${trip.seats}</td>

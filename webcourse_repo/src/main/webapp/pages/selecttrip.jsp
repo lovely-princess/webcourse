@@ -27,6 +27,7 @@
         <th style="border: solid black 2px;">маршрут</th>
         <th style="border: solid black 2px;">дата</th>
         <th style="border: solid black 2px;">мест</th>
+        <th style="border: solid black 2px;">цена</th>
     </tr>
     <c:forEach var="trip" items="${trips}">
         <tr style="border: solid black 1px;">
@@ -34,6 +35,7 @@
             <td style="border: solid black 1px;">${trip.route_id.route_name}</td>
             <td style="border: solid black 1px;">${trip.date_time}</td>
             <td style="border: solid black 1px;">${trip.seats}</td>
+            <td style="border: solid black 1px;">${price}</td>
         </tr>
     </c:forEach>
 </table>

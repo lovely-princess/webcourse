@@ -30,8 +30,6 @@
         <!--<a href="/adminhome"><button type="button">администратор</button></a>-->
     </c:if>
 <img src="https://i.yapx.ru/MQSzA.png" width="500px" height="535px">
-<a id="map"></a>
-<button type="button" id="map" class="map"></button>
     <!-- MAP -->
 </p>
 

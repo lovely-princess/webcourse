@@ -74,11 +74,21 @@ public class scheduleDAO {
         Query<schedule> query = session.createQuery("from schedule WHERE route_id = :route_id", schedule.class);
         query.setParameter("route_id", to_station.getRoute_id());
         List<schedule> trips = query.getResultList();
+
+        List<schedule> result = new ArrayList<schedule>();
+        users_in_tripsDAO users_in_tripsdao = new users_in_tripsDAO();
+        for(schedule trip: trips){
+            List<users_in_trips> taken = users_in_tripsdao.getOrdersByTripId(trip);
+            if (taken.size() < trip.getSeats()){
+                trip.setSeats(trip.getSeats() - taken.size());
+                result.add(trip);
+            }
+        }
         session.getTransaction().commit();
         if (session != null && session.isOpen()) {
             session.close();
         }
-        return trips;
+        return result;
     }
 
     public schedule getTripById(int trip_id) throws SQLException {
