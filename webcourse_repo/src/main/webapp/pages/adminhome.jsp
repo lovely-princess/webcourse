@@ -55,7 +55,7 @@
 </table>
 <form action="/adduser" method="post">
     <input readonly required value="${user_id}" type="number" name="user_id">
-    <input type="submit" value="добавить пользователя">
+    <input type="submit" value="добавить пользователя" id="enter_adduser">
 </form>
 <br>
 
@@ -94,7 +94,7 @@
 </table>
 <form action="/addtrip" method="post">
     <input readonly required value="${user_id}" type="number" name="user_id">
-    <input type="submit" value="добавить рейс">
+    <input type="submit" value="добавить рейс" id="enter_addtrip">
 </form>
 <!--<a href="/addtrip">добавить рейс</a>
 --->

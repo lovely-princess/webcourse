@@ -25,7 +25,7 @@
     <c:if test="${is_admin}">
         <form action="/adminhome" method="post">
             <input readonly required value="${user_id}" type="number" name="user_id">
-            <input type="submit" value="администратор">
+            <input type="submit" value="администратор" id="enter_admin">
         </form>
         <!--<a href="/adminhome"><button type="button">администратор</button></a>-->
     </c:if>
@@ -83,7 +83,7 @@
         <option value="18">магический амулет</option>
         <option value="19">смысл жизни</option>
     </select>
-    <input type="submit" value="билеты">
+    <input type="submit" value="билеты" id="observe_trips">
 </form>
 </p>
 

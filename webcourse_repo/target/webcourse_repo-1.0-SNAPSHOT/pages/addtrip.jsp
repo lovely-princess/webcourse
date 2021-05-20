@@ -36,7 +36,7 @@
     <label for="seats">количество мест</label>
     <input required type="number" min="1" id="seats" name="seats">
 
-    <button type="submit">добавить рейс</button>
+    <button type="submit" id="enter_submit_addtrip">добавить рейс</button>
 </form>
 
 </body>

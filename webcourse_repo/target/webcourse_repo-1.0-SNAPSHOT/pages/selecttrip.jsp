@@ -56,7 +56,7 @@
             <option value="${trip.trip_id}">${trip.trip_id}</option>
         </c:forEach>
     </select>
-    <input type="submit" value="заказать билет">
+    <input type="submit" value="заказать билет" id="finish_order">
 </form>
 
 </body>

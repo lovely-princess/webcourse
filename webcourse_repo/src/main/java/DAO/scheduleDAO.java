@@ -80,8 +80,12 @@ public class scheduleDAO {
         for(schedule trip: trips){
             List<users_in_trips> taken = users_in_tripsdao.getOrdersByTripId(trip);
             if (taken.size() < trip.getSeats()){
-                trip.setSeats(trip.getSeats() - taken.size());
-                result.add(trip);
+                schedule t = new schedule();
+                t.setTrip_id(trip.getTrip_id());
+                t.setDate_time(trip.getDate_time());
+                t.setRoute_id(trip.getRoute_id());
+                t.setSeats(trip.getSeats() - taken.size());
+                result.add(t);
             }
         }
         session.getTransaction().commit();

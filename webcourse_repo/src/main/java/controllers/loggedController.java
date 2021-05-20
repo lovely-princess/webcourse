@@ -198,12 +198,18 @@ public class loggedController {
     @RequestMapping(value = "/addnewuser", method = RequestMethod.POST)
     public ModelAndView adduserr(@RequestParam(name = "name", required = true) String name,
                                  @RequestParam(name = "phone", required = true) String phone,
-                                 @RequestParam(name = "admin",required = true) boolean admin,
+                                 @RequestParam(name = "admin", required = false) boolean admin,
                                  @RequestParam(name = "user_id",required = true) int user_id) throws SQLException {
         users user = new users();
         System.out.println(name);
         user.setUser_name(name);
-        user.setIs_admin(admin);
+        System.out.println(admin);
+        if(admin){
+            user.setIs_admin(admin);
+        }else {
+            user.setIs_admin(false);
+        }
+        //user.setIs_admin(admin);
         user.setUser_contact_info("{\"phone\": \"" + phone + "\"}");
 
         usersDAO usersdao = new usersDAO();

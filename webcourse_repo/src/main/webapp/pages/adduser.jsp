@@ -25,9 +25,9 @@
     <input required type="text" id="phone" name="phone">
 
     <label for="admin">админ?</label>
-    <input required type="checkbox" id="admin" name="admin">
+    <input type="checkbox" id="admin" name="admin">
 
-    <button type="submit">добавить пользователя</button>
+    <button type="submit" id="enter_submit_adduser">добавить пользователя</button>
 </form>
 
 </body>

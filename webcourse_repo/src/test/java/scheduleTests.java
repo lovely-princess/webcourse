@@ -65,7 +65,7 @@ public class scheduleTests {
     public void getAllTripsTest () throws SQLException{
         scheduleDAO schedule_dao = new scheduleDAO();
         List<schedule> trips = schedule_dao.getAllTrips();
-        Assert.assertEquals(trips.size(), 5);
+        Assert.assertEquals(trips.size(), 7);
     }
 
     @Test
@@ -88,6 +88,6 @@ public class scheduleTests {
         int s = schedule_dao.getTripById(id).getSeats();
         Assert.assertEquals(s, 11);
         schedule_dao.deleteTrip(trip);
-        Assert.assertEquals(schedule_dao.getAllTrips().size(), 5);
+        Assert.assertEquals(schedule_dao.getAllTrips().size(), 7);
     }
 }

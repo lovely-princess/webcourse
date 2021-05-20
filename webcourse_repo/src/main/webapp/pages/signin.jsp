@@ -7,9 +7,9 @@
 <body>
     <h3>авторизация</h3>
     <form action="/auth" method="post">
-        <input required type="text" name="user_id" placeholder="id пользователя">
-        <input type="submit" value="войти">
+        <input id="enter_id" required type="text" name="user_id" placeholder="id пользователя">
+        <input type="submit" value="войти" id="enter_submit">
     </form>
-    <h2><a href="/signup">зарегистрироваться</a></h2>
+    <h2><a href="/signup" id="reg">зарегистрироваться</a></h2>
 </body>
 </html>
