@@ -45,16 +45,12 @@ public class useraddtest {
         // перешли на домашнюю страницу администратора
         driver.findElement(By.id("enter_adduser")).click();
         // перешли на страницу создания нового пользователя
-
         usersDAO usersdao = new usersDAO();
         List<users> all = usersdao.loadAll();
-
         driver.findElement(By.id("name")).sendKeys("w w w");
         driver.findElement(By.id("phone")).sendKeys("+3(333)333-33-33");
         driver.findElement(By.id("enter_submit_adduser")).click();
-
         List<users> new_all = usersdao.loadAll();
-
         System.out.println(new_all.size());
         System.out.println(all.size());
         assert(new_all.size() == (all.size() + 1));

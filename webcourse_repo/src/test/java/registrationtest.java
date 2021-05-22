@@ -73,21 +73,25 @@ public class registrationtest {
         System.out.println(all.size());
         assert(new_all.size() == (all.size() + 1));
 
-    }
 
-    @Test
-    public void improve() throws SQLException{
-
-        // теперь удалим лишнего пользователя
         driver.get("http://localhost:8080/");
         driver.findElement(By.id("enter_id")).sendKeys("1");
         driver.findElement(By.id("enter_submit")).click();
         // перешли на домашнюю страницу пользователя
         driver.findElement(By.id("enter_admin")).click();
         // перешли на домашнюю страницу администратора
+
+        List<users> rall = usersdao.loadAll();
+
         int num = driver.findElements(By.name("delete_user_id")).size();
         driver.findElements(By.name("delete_user_id")).get(num - 1).click();
-        assert(1 == 1);
+
+        List<users> rnew_all = usersdao.loadAll();
+
+        System.out.println(rnew_all.size());
+        System.out.println(rall.size());
+        assert(rnew_all.size() == (rall.size() - 1));
+
     }
 
     @Test
@@ -111,4 +115,6 @@ public class registrationtest {
         List<users_in_trips> new_all = users_in_tripsdao.loadAll();
         assert(all.size() == new_all.size() - 1);
     }
+
+
 }
